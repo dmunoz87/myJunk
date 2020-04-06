@@ -1,5 +1,5 @@
 //Author Name: David Munoz
-//Date: 3/15/2020
+//Date: 4/12/2020
 //Program Name: Munoz_Text_Analyzer
 //Purpose: Analyze the words in given text file
 
@@ -7,6 +7,11 @@ package MunozTextAnalyzer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,6 +20,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -22,6 +28,8 @@ import java.util.logging.Logger;
  */
 public class Munoz_Text_Analyzer extends javax.swing.JFrame {
 
+    Connection conn = null;
+    
     /**
      * Creates new form 
      */
@@ -39,33 +47,50 @@ public class Munoz_Text_Analyzer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        btnStart = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        radSpellCheck = new javax.swing.JRadioButton();
+        radWordCount = new javax.swing.JRadioButton();
+        btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Text Analyzer");
 
-        jButton1.setText("Start");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnStart.setText("Start");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnStartActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Press start to analyze the words in Macbeth.");
+        jLabel1.setText("Choose an option, then press Start to run the selected function");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
         jTextArea1.getAccessibleContext().setAccessibleName("txtResult");
 
-        jButton2.setLabel("Exit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setLabel("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnExitActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radSpellCheck);
+        radSpellCheck.setLabel("Database Spell Check");
+
+        buttonGroup1.add(radWordCount);
+        radWordCount.setLabel("Word Count");
+
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
             }
         });
 
@@ -74,36 +99,52 @@ public class Munoz_Text_Analyzer extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(radWordCount)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(radSpellCheck))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(radSpellCheck)
+                    .addComponent(radWordCount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExit)
+                    .addComponent(btnClear)
+                    .addComponent(btnStart))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jButton1.getAccessibleContext().setAccessibleName("btnStart");
+        btnStart.getAccessibleContext().setAccessibleName("btnStart");
         jScrollPane1.getAccessibleContext().setAccessibleName("txtResults");
-        jButton2.getAccessibleContext().setAccessibleName("btnExit");
+        btnExit.getAccessibleContext().setAccessibleName("btnExit");
+        radSpellCheck.getAccessibleContext().setAccessibleName("radSpellCheck");
+        radWordCount.getAccessibleContext().setAccessibleName("radWordCount");
+        btnClear.getAccessibleContext().setAccessibleName("btnClear");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,26 +153,35 @@ public class Munoz_Text_Analyzer extends javax.swing.JFrame {
      * 
      * @param evt 
      */
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * Method run when start button is pressed
-     * Calls all methods necessary to complete processing of text analyzer app
+     * Calls methods necessary to complete processing of text analyzer application depending upon user selected radio button
      * 
      * @param evt 
      */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        clear();
+        
+        if(radWordCount.isSelected()){
             File file = new File("macbeth.txt");
             Map<String, Integer> wordMap = runAnalyzer(file);
             Map<String, Integer> result = createFinalWordList(wordMap);
             writeToTextArea(result);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Munoz_Text_Analyzer.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        else if(radSpellCheck.isSelected()){
+            File file = new File("testStates.txt");
+            spellCheck(file);
+        }
+        
+    }//GEN-LAST:event_btnStartActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+    }//GEN-LAST:event_btnClearActionPerformed
 
     /**
      * Main method creates and displays form
@@ -151,31 +201,34 @@ public class Munoz_Text_Analyzer extends javax.swing.JFrame {
     /**
      * This method performs processing on file and places formatted words and counts into Map to be returned
      * 
-     * @param file we are processing
-     * @return
-     * @throws FileNotFoundException 
+     * @param file file to be analyzed
+     * @return wordMap with all formatted words from file and the integer count of how many times they were used
      */
-    public static Map runAnalyzer(File file) throws FileNotFoundException{
-        
-        Scanner sc = new Scanner(file); //scan given file name
-        
-        ArrayList<String> stringArrayList = new ArrayList(); // ArrayList to hold each word in the file
+    public static Map runAnalyzer(File file){
+      
+        ArrayList<String> stringArrayList = new ArrayList(); // ArrayList to hold formatted words
         String currentWord = ""; // current word being scanned
         String nonWord = ""; // to hold non words
         String[] delimitedWord = new String[2]; // string array to separate words with punctuation attached
-        
         Map<String, Integer> wordMap = new HashMap(); // map to hold word and count combination
-        
-        while(sc.hasNext()){
-            currentWord = sc.next();
-            if (currentWord.endsWith("!")||currentWord.endsWith(".")||currentWord.endsWith("?")||currentWord.endsWith(";")||currentWord.endsWith(",")||currentWord.endsWith(":")||currentWord.endsWith("-")){ // if there is punctuation attached to word
-                delimitedWord = currentWord.split("[!.?;:,-]"); // split the word from punctuation
-                currentWord = delimitedWord[0]; //place word without punctuation into currentWord variable
+          
+        try{ 
+            Scanner sc = new Scanner(file); //scan given file name
+            while(sc.hasNext()){
+                currentWord = sc.next();
+                
+                if (currentWord.endsWith("!")||currentWord.endsWith(".")||currentWord.endsWith("?")||currentWord.endsWith(";")||currentWord.endsWith(",")||currentWord.endsWith(":")||currentWord.endsWith("-")){ // if there is punctuation attached to word
+                    delimitedWord = currentWord.split("[!.?;:,-]"); // split the word from punctuation
+                    currentWord = delimitedWord[0]; //place word without punctuation into currentWord variable
+                }
+                if (currentWord.endsWith("|")) //this if statement prevents | from being placed into the list
+                    currentWord = nonWord;
+                stringArrayList.add(currentWord.toLowerCase()); // add formatted word to arraylist
             }
-            //if (currentWord.endsWith("|")) //this if statement prevents | from being placed into the list
-                //currentWord = nonWord;
-            stringArrayList.add(currentWord.toLowerCase()); // add formatted word to arraylist
-        } 
+        }
+        catch(FileNotFoundException ex){
+            Logger.getLogger(Munoz_Text_Analyzer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         for(int i = 0; i < stringArrayList.size();i++){ // for loop iterates through each item in stringArrayList
             String testWord = stringArrayList.get(i); // word at index i is placed into string variable testWord
@@ -195,11 +248,10 @@ public class Munoz_Text_Analyzer extends javax.swing.JFrame {
     }
     /**
      * This method performs final processing on wordMap
-     * opens stream on wordMap and sorts keys by values, places these entries into reverse order, takes top 20 results and returns variable result
-     * which is  LinkedHashMap<String, Integer> that keeps the order of the entries in it
+     * opens stream on wordMap and sorts keys by values, places these entries into reverse order and keeps top 20 results 
      * 
      * @param wordMap formatted words placed into this Map along with count of each word
-     * @return 
+     * @return LinkedHashMap result which keep the order of the entries in it
      */
     public static LinkedHashMap createFinalWordList(Map<String, Integer> wordMap){
         
@@ -224,12 +276,60 @@ public class Munoz_Text_Analyzer extends javax.swing.JFrame {
             jTextArea1.append(entry.toString() + '\n');
         }   
     }
+    
+    /**
+     * This method takes a file and 
+     *
+     * @param file file to check against database
+     */
+    private void spellCheck(File file){
+        ArrayList<String> stringArrayList = new ArrayList(); // ArrayList to hold words from test file
+        ArrayList<String> dictionaryWordArrayList = new ArrayList(); // ArrayList to hold words from database
+        try {
+            Scanner sc = new Scanner(file);
+            
+            while(sc.hasNext()){
+                stringArrayList.add(sc.nextLine());
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Munoz_Text_Analyzer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // get all words from database and place into dictionaryWordArrayList
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/wordoccurrences", "root", "password");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM WORDS");
+            ResultSet rs= ps.executeQuery();
+            while (rs.next()){
+                dictionaryWordArrayList.add(rs.getString(1));
+            }                                
+        }
+        catch (SQLException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, ex, "Login Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        for(String word : stringArrayList){
+            if(!(dictionaryWordArrayList.contains(word))){
+                jTextArea1.append(word + '\n');
+            }
+        }
+    }
+    
+    private void clear(){
+        jTextArea1.selectAll();
+        jTextArea1.replaceSelection("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnStart;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JRadioButton radSpellCheck;
+    private javax.swing.JRadioButton radWordCount;
     // End of variables declaration//GEN-END:variables
 }
