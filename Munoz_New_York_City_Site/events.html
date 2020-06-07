@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>New York City Events</title>
+	<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script>
+	<script src="events.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous">
+	<link rel="stylesheet" href="nyc.css">
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<div class="row">
+		<div class="columns">
+			<h1 class="text-center">New York City</h1>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="row">
+		<div class="columns text-center">
+			<a class="button success" href="index.html">Home</a>
+			<a class="button success" href="history.html">History</a>
+			<a class="button success" href="events.html">Events</a>
+			<a class="button success" href="weather.html">Weather</a>
+			<a class="button success" href="environment.html">Environment</a>
+		</div>
+	</div>
+	
+	<br><br>
+	
+	<div class="row">
+		<div class="columns">
+			<div><h3 class="text-center">Events</h3></div>
+			
+			<div class="iframe text-center">
+				<iframe src="http://www.nycgo.com" name="frame" id="frame">
+					Your browser does not support iframes.
+				</iframe>
+				
+				<div class="frameLinks">
+					<a href="https://www.nycgo.com" target="frame">NYC Go</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					<a href="https://www.iloveny.com/places-to-go/new-york-city/" target="frame">I Love NY</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					<a href="https://www.10best.com/destinations/new-york/new-york/" target="frame">10 Best</a>
+				</div>
+			</div>
+			
+			<br><br><br>
+			
+			<div class="events">	
+				<p>This is a list of events happening soon in the city</p>
+				<ul>
+					<li id="timeUntil"></li>
+					<li>May 1 - Superfine! Art Fair. Punk rock spirit meets art market innovation at this third annual art fair. - 12pm - 107 Grand Street</li>
+					<li>May 1 - NBA Easter Conference Semifinal: Brooklyn Nets vs TBD - Home Game 2 - 3:30pm - Barclays Center - 620 Atlantic Avenue</li>
+					<li>May 3 - Good Morning America - 7am - 44th Street & Broadway Times Square</li>
+					<li>May 6 - The Moore Family Tour - 10am - Tenement Museum - 103 Orchard Street</li>
+					<li>May 11 - Theodore Roosevelt Memorial Hall - 10am - American Museum of Natural History - Central Park West at 79th Street</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+<br><br>
+
+	<div class="row">
+		<div class="columns">
+			<div class="eventForm">
+				<form action="#" id="eventForm">
+					<p><label for="firstName">First Name: <input type="text" id="firstName" class="reqd"></label></p>
+					<p><label for="lastName">Last Name: <input type="text" id="lastName" class="reqd"></label></p>
+					<p><label for="email">Email Address: <input type="text" id="email" class="reqd email"></label></p>
+					<p><label for="confirmEmail">Confirm Email Address: <input type="text" id="confirmEmail" class="reqd email confirm"></label></p>
+					<p><label for="phone">Phone <input type="text" id="phone" class="reqd phone"></label></p>
+					<p><label for="radioMale"><input type="radio" id="radioMale" value="radioMale" name="sex" class="radio">Male</label>
+					   <label for="radioFemale"><input type="radio" id="radioFemale" value="radioFemale" name="sex" class="radio">Female</label>
+					</p>
+					<p><input type="submit" value="Submit">&nbsp;<input type="reset" value="Reset"></p>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+<br><br><br>
+
+<footer>
+	<div class="footer text-center"><small><i>Copyright &copy; David Munoz 2019</i></small></div>
+</footer>
+</html>

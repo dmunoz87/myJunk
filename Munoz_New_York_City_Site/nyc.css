@@ -1,0 +1,117 @@
+body{
+	margin:3% 10% 3% 10%;
+}
+
+div.main{
+	font-size:18px;
+}
+
+div.slideshow{
+	font-size:18px;
+	font-family:Arial;
+}
+
+h1{
+	font-size:50px;
+	opacity:.8;
+	text-shadow: 2px 2px #b9a9d1;
+}
+
+input.invalid {
+     background-color: #FF9;
+     border: 2px red inset;
+}
+
+label.invalid {
+     color: #F00;
+     font-weight: bold;
+}
+
+input{
+	background-color: #FFF;
+	border:default;
+}
+
+label{
+	color: #000;
+	font-weight: normal;
+}
+
+p{
+	text-indent:40px;
+}
+
+li{
+	margin-left:60px;
+}
+
+.button.success{
+	background:#D0D0D0;
+	width: 140px;
+	height: 50px;
+	color: black;
+	font-size: 18px;
+	opacity:.8;
+	border: 2px solid #b9a9d1;
+	border-radius: 3px;
+	transition:.5s;
+}
+
+.button.success:hover{
+	background: #9fdbb7;
+}
+
+.envHeadings{
+	display:inline;
+	margin-left:100px;
+	margin-right:100px;
+	color:#737373;
+}
+
+.frameLinks:a{
+	display:inline;
+}
+
+.seasonalWeather{
+	display:inline-block;
+	height:300px;
+	margin:25px;
+	padding:20px;
+	width:225px;
+	vertical-align:top;
+	border:1px solid #000;
+	border-radius:4px;
+}
+#environmentTarget{
+	margin: 0 auto;
+	width:600px;
+	height:200px;
+	border:1px solid #000;
+	border-radius:4px;
+	padding:20px;
+}
+
+#eventForm{
+	width:500px
+}
+
+#frame{
+	width:60%;
+	height:400px;
+}
+
+#imgCaption{
+	padding:20px;
+}
+
+#imgTitle{
+	padding:20px;
+	font-size:22px;
+}
+#mainImage{
+	opacity:.7;
+}
+
+#newYorkWeather{
+	opacity:.8;
+}

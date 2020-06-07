@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>New York City Weather</title>
+	<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script>
+	<script src="http://api.openweathermap.org/data/2.5/weather?lat=40.71&lon=-74.01&units=imperial&APPID=0d8d1938fe0f5699ac3353930554bcf4&format=json"></script>
+	<script src="weather.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous">
+	<link rel="stylesheet" href="nyc.css">
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<div class="row">
+		<div class="columns">
+			<h1 class="text-center">New York City</h1>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="row">
+		<div class="columns text-center">
+			<a class="button success" href="index.html">Home</a>
+			<a class="button success" href="history.html">History</a>
+			<a class="button success" href="events.html">Events</a>
+			<a class="button success" href="weather.html">Weather</a>
+			<a class="button success" href="environment.html">Environment</a>
+		</div>
+	</div>
+	
+	<br><br>
+	
+	<div class="row">
+		<div class="columns text-center">
+		
+			<div><h3 class="text-center">Weather</h3></div>
+			<div><h4 class="text-center">Current Conditions</h4></div>
+			
+			<div id="weather"> </div>
+		</div>
+	</div>
+	
+	<br><br>
+	
+	<div class="row">
+		<div class="columns text-center">
+			<div class="seasonalWeather">
+				<h4>Winter</h4><br>
+				Cold and windy in New York City during the winter,<br> good chance of snow, sleet and freezing rain.<br>
+				Average High: 39 F<br>
+				Average Low: 26 F<br>
+			</div>
+			<div class="seasonalWeather">
+				<h4>Spring</h4><br>
+				Weather is warming up, can be a rainy time.<br>
+				Average High: 71 F<br>
+				Average Low: 45 F<br>
+			</div>
+			<div class="seasonalWeather">
+				<h4>Summer</h4><br>
+				Hot weather comes to New York,<br> pack plenty of shorts and short sleeves.<br>
+				Average High: 85 F<br>
+				Average Low: 70 F<br>
+			</div>
+			<div class="seasonalWeather">
+				<h4>Fall</h4><br>
+				Weather is cooling down and a crispness is in the air<br> as the leaves fall from the trees<br>
+				Average High: 65 F<br>
+				Average Low: 50 F<br>
+			</div>
+		</div>
+	</div>
+	
+	<br><br>
+	
+	<div class="row">
+		<div class="columns text-center">
+			<img id="newYorkWeather" src="images/new_york_sky.jpg" alt="New York Sky">
+		</div>
+	</div>
+</body>
+
+<br><br><br>
+
+<footer>
+	<div class="footer text-center"><small><i>Copyright &copy; David Munoz 2019</i></small></div>
+</footer>
+</html>
